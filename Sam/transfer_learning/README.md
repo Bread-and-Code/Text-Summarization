@@ -1,5 +1,7 @@
 <h3>Abstractive summarization using BERT(Bidirectional Encoder Representations from Transformers) as encoder and transformer decoder </h3>
 
+<h4> author: Somyajit sam </h4>
+
 After searching for a long f**king time I decided to use a text generation library called "Texar" , Its a beautiful library with a lot of abstractions, it is similar to 
 scikit learn, but for text generation problems.
 
