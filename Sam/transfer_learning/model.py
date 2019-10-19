@@ -1,3 +1,7 @@
+"""
+The model requires some encoding changes
+Not using LSTM models....
+"""
 import sys
 if not 'texar_repo' in sys.path:
   sys.path += ['texar_repo']
