@@ -1,3 +1,4 @@
+"""Miscelleneous + batches """
 def get_batches(summaries, texts, batch_size):
     """Batch summaries, texts, and the lengths of their sentences together"""
     for batch_i in range(0, len(texts)//batch_size):
