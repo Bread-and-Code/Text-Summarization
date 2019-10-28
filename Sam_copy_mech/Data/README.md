@@ -14,5 +14,7 @@ This dataset consists of reviews of fine foods from amazon. The data span a peri
 - 256,059 users<br>
 - 74,258 products<br>
 - 260 users with > 50 reviews<br>
-![Img](https://github.com/Bread-and-Code/Text-Summarization/blob/master/Sam_copy_mech/Data/wordcloud.png)
+<img src="https://github.com/Bread-and-Code/Text-Summarization/blob/master/Sam_copy_mech/Data/wordcloud.png"
+     alt="img"
+     style="float: left; margin-right: 10px;" />
 
