@@ -11,22 +11,22 @@ Basically we are trying to find the relation between different word in the sourc
 Before going forward with the actual dataset, i.e, our research papers in the drive. I have found a nice dataset in kaggle on Customer Reviews
 so lets just build our summarizer on that scaling as a working model and then we go forward with the <b>BIG PLAN</b>.<br>
 <h1>FILES TO BE MADE:</h1>
-<li>attention.py</li>
-<li>libraries.py</li>
-<li>read.py</li>
-<li>duplicates.py</li>
-<li>preprocess.py</li>
-<li>data_clean.py</li>
-<li>read_sum.py</li>
-<li>sum_clean.py</li>
-<li>append.py</li>
-<li>display.py</li>
+<li>attention.py X</li>
+<li>libraries.py X</li>
+<li>read.py X</li>
+<li>duplicates.py X</li>
+<li>preprocess.py X</li>
+<li>data_clean.py X</li>
+<li>read_sum.py X</li>
+<li>sum_clean.py X</li>
+<li>append.py X</li>
+<li>display.py X</li>
 <li>vizal_distrb.py</li>
 <li>maxlen.py</li>
 <li>split.py</li>
-<li>txt_tokenizer.py</li>
-<li>sum_tokenizer.py</li>
-<li>DNN_model.py</li>
+<li>txt_tokenizer.py X</li>
+<li>sum_tokenizer.py X</li>
+<li>DNN_model.py X</li>
 <li>callback.py</li>
 <li>fit.py</li>
 <li>viz_plot.py</li>
