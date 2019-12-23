@@ -458,8 +458,10 @@ history=model.fit([x_tr,y_tr[:,:-1]], y_tr.reshape(y_tr.shape[0],y_tr.shape[1], 
 from matplotlib import pyplot 
 pyplot.plot(history.history['loss'], label='train') 
 pyplot.plot(history.history['val_loss'], label='test') 
-pyplot.legend() pyplot.show()m matplotlib import pyplot 
+pyplot.legend() 
+pyplot.show()
 pyplot.plot(history.history['loss'], label='train') 
 pyplot.plot(history.history['val_loss'], label='test') 
-pyplot.legend() pyplot.show()
+pyplot.legend() 
+pyplot.show()
 
