@@ -1,0 +1,1875 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{amazon\_reviews\_final}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{attention} \PY{k}{import} \PY{n}{AttentionLayer}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
+        \PY{k+kn}{import} \PY{n+nn}{re}
+        \PY{k+kn}{from} \PY{n+nn}{bs4} \PY{k}{import} \PY{n}{BeautifulSoup}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{Tokenizer} 
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{n+nn}{.}\PY{n+nn}{sequence} \PY{k}{import} \PY{n}{pad\PYZus{}sequences}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{stopwords}
+        \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Input}\PY{p}{,} \PY{n}{LSTM}\PY{p}{,} \PY{n}{Embedding}\PY{p}{,} \PY{n}{Dense}\PY{p}{,} \PY{n}{Concatenate}\PY{p}{,} \PY{n}{TimeDistributed}
+        \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}
+        \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{EarlyStopping}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{display.max\PYZus{}colwidth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{)}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_qint8 = np.dtype([("qint8", np.int8, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_quint8 = np.dtype([("quint8", np.uint8, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_qint16 = np.dtype([("qint16", np.int16, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_quint16 = np.dtype([("quint16", np.uint16, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_qint32 = np.dtype([("qint32", np.int32, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np\_resource = np.dtype([("resource", np.ubyte, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorboard\textbackslash{}compat\textbackslash{}tensorflow\_stub\textbackslash{}dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_qint8 = np.dtype([("qint8", np.int8, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorboard\textbackslash{}compat\textbackslash{}tensorflow\_stub\textbackslash{}dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_quint8 = np.dtype([("quint8", np.uint8, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorboard\textbackslash{}compat\textbackslash{}tensorflow\_stub\textbackslash{}dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_qint16 = np.dtype([("qint16", np.int16, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorboard\textbackslash{}compat\textbackslash{}tensorflow\_stub\textbackslash{}dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_quint16 = np.dtype([("quint16", np.uint16, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorboard\textbackslash{}compat\textbackslash{}tensorflow\_stub\textbackslash{}dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  \_np\_qint32 = np.dtype([("qint32", np.int32, 1)])
+c:\textbackslash{}program files\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorboard\textbackslash{}compat\textbackslash{}tensorflow\_stub\textbackslash{}dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np\_resource = np.dtype([("resource", np.ubyte, 1)])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{data}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reviews.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{100000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}            Id   ProductId          UserId                       ProfileName  \textbackslash{}
+        0           1  B001E4KFG0  A3SGXH7AUHU8GW                        delmartian   
+        1           2  B00813GRG4  A1D87F6ZCVE5NK                            dll pa   
+        2           3  B000LQOCH0   ABXLMWJIXXAIN   Natalia Corres "Natalia Corres"   
+        3           4  B000UA0QIQ  A395BORC6FGVXV                              Karl   
+        4           5  B006K2ZZ7K  A1UQRSCLF8GW1T     Michael D. Bigham "M. Wassir"   
+        5           6  B006K2ZZ7K   ADT0SRK1MGOEU                    Twoapennything   
+        6           7  B006K2ZZ7K  A1SP2KVKFXXRU1                 David C. Sullivan   
+        7           8  B006K2ZZ7K  A3JRGQVEQN31IQ                Pamela G. Williams   
+        8           9  B000E7L2R4  A1MZYO9TZK0BBI                          R. James   
+        9          10  B00171APVA  A21BT40VZCCYT4                     Carol A. Reed   
+        10         11  B0001PB9FE  A3HDKO7OW0QNK4                      Canadian Fan   
+        11         12  B0009XLVG0  A2725IB4YY9JEB            A Poeng "SparkyGoHome"   
+        12         13  B0009XLVG0   A327PCT23YH90                                LT   
+        13         14  B001GVISJM  A18ECVX2RJ7HUE                   willie "roadie"   
+        14         15  B001GVISJM  A2MUGFV2TDQ47K               Lynrie "Oh HELL no"   
+        15         16  B001GVISJM  A1CZX3CP8IKQIJ                      Brian A. Lee   
+        16         17  B001GVISJM  A3KLWF6WQ5BNYO                    Erica Neathery   
+        17         18  B001GVISJM   AFKW14U97Z6QO                             Becca   
+        18         19  B001GVISJM  A2A9X58G2GTBLP                           Wolfee1   
+        19         20  B001GVISJM  A3IV7CL2C13K2U                              Greg   
+        20         21  B001GVISJM  A1WO0KGLPR5PV6                          mom2emma   
+        21         22  B001GVISJM   AZOF9E17RGZH8                    Tammy Anderson   
+        22         23  B001GVISJM   ARYVQL4N737A1                     Charles Brown   
+        23         24  B001GVISJM   AJ613OLZZUG7V                            Mare's   
+        24         25  B001GVISJM  A22P2J09NJ9HKE       S. Cabanaugh "jilly pepper"   
+        25         26  B001GVISJM  A3FONPR03H3PJS      Deborah S. Linzer "Cat Lady"   
+        26         27  B001GVISJM  A3RXAU2N8KV45G                            lady21   
+        27         28  B001GVISJM   AAAS38B98HMIK                      Heather Dube   
+        28         29  B00144C10S  A2F4LZVGFLD1OB                            DaisyH   
+        29         30  B0001PB9FY  A3HDKO7OW0QNK4                      Canadian Fan   
+        {\ldots}       {\ldots}         {\ldots}             {\ldots}                               {\ldots}   
+        99970   99971  B000LQORDE  A1RQB9AVOXN0TF                               mim   
+        99971   99972  B000LQORDE  A3VLYQ6V775LNA                             aaaaa   
+        99972   99973  B000LQORDE  A3K1J1GG2GWNJ1                            margot   
+        99973   99974  B000LQORDE  A2YWRWSLEJRM92               Pennsylvania Reader   
+        99974   99975  B000LQORDE   AEPEYS74CE6KI                     Daniel Esmond   
+        99975   99976  B000LQORDE  A2OMR2QAF5J26E                    EskimoSquirrel   
+        99976   99977  B000LQORDE  A1CVEGNOQ62A25                            Edward   
+        99977   99978  B000LQORDE  A2E2IMMWYCHIG6                        Tessa Noel   
+        99978   99979  B000LQORDE   AWL9HU41JGO9R                           GatorCW   
+        99979   99980  B000LQORDE  A1Y8TNPDBS8UKB                      Sean Gerrity   
+        99980   99981  B000LQORDE  A1DDS96O83SVEA                        R. Flowers   
+        99981   99982  B000LQORDE  A1YH21OL6SC2MY                       Jiachun Guo   
+        99982   99983  B000LQORDE  A12VDYKZ6BIQ9L      Daniel Levenson "danfromfla"   
+        99983   99984  B000LQORDE  A2EOLB7LR508ES                        Chris,  CA   
+        99984   99985  B000LQORDE  A1YVCGV8G16OMM                            Nathan   
+        99985   99986  B000LQORDE  A1BN8134NN8IAC     Jorge A. Zuniga "CerealLOVER"   
+        99986   99987  B000LQORDE  A30Z0GG96D11EO  Sofia Hernandez "Shut up B*\&\#\$!"   
+        99987   99988  B000LQORDE  A19SFNK8QI1JZI                             Jerri   
+        99988   99989  B000LQORDE   ATPRSDCBH6O9L        Jiashen You "statistician"   
+        99989   99990  B000LQORDE  A3NIPWPJSFOZZT                        Won H. Lee   
+        99990   99991  B000LQORDE  A294C2HWGIVYLS                               Den   
+        99991   99992  B000LQORDE  A2JXVMU6OMK6XI                      Healthy Jake   
+        99992   99993  B000LQORDE   ANTN4ULDPYM07                                AB   
+        99993   99994  B000LQORDE  A2BXV5BQYXU6HP                           boolean   
+        99994   99995  B000LQORDE   AL22WN8RBBOW7             LifeInTheCity "trogg"   
+        99995   99996  B000LQORDE  A2P7HIRYYWVOBD                             Mason   
+        99996   99997  B000LQORDE  A1K0ZH5MQFBA77                        jennilight   
+        99997   99998  B000LQORDE  A29FRN2O7LWINL                           T. Tsai   
+        99998   99999  B000LQORDE   A9Q950IPXJR1D           Lynda "casual customer"   
+        99999  100000  B000LQORDE  A19W47CXJJP1MI                Amazonian Consumer   
+        
+               HelpfulnessNumerator  HelpfulnessDenominator  Score        Time  \textbackslash{}
+        0                         1                       1      5  1303862400   
+        1                         0                       0      1  1346976000   
+        2                         1                       1      4  1219017600   
+        3                         3                       3      2  1307923200   
+        4                         0                       0      5  1350777600   
+        5                         0                       0      4  1342051200   
+        6                         0                       0      5  1340150400   
+        7                         0                       0      5  1336003200   
+        8                         1                       1      5  1322006400   
+        9                         0                       0      5  1351209600   
+        10                        1                       1      5  1107820800   
+        11                        4                       4      5  1282867200   
+        12                        1                       1      1  1339545600   
+        13                        2                       2      4  1288915200   
+        14                        4                       5      5  1268352000   
+        15                        4                       5      5  1262044800   
+        16                        0                       0      2  1348099200   
+        17                        0                       0      5  1345075200   
+        18                        0                       0      5  1324598400   
+        19                        0                       0      5  1318032000   
+        20                        0                       0      5  1313452800   
+        21                        0                       0      5  1308960000   
+        22                        0                       0      5  1304899200   
+        23                        0                       0      5  1304467200   
+        24                        0                       0      5  1295481600   
+        25                        0                       0      5  1288310400   
+        26                        0                       1      1  1332633600   
+        27                        0                       1      4  1331856000   
+        28                        0                       0      5  1338854400   
+        29                        1                       1      5  1107820800   
+        {\ldots}                     {\ldots}                     {\ldots}    {\ldots}         {\ldots}   
+        99970                     1                       3      5  1308614400   
+        99971                     1                       3      5  1298851200   
+        99972                     1                       3      5  1298678400   
+        99973                     1                       3      5  1295740800   
+        99974                     1                       3      5  1293494400   
+        99975                     1                       3      5  1292457600   
+        99976                     1                       3      5  1288569600   
+        99977                     1                       3      4  1283040000   
+        99978                     1                       3      4  1283040000   
+        99979                     1                       3      5  1275955200   
+        99980                     1                       3      5  1253577600   
+        99981                     1                       3      4  1252713600   
+        99982                     1                       3      5  1244937600   
+        99983                     1                       3      5  1241395200   
+        99984                     1                       3      5  1239148800   
+        99985                     1                       3      5  1239062400   
+        99986                     1                       3      5  1236124800   
+        99987                     4                       8      1  1292025600   
+        99988                     4                       8      5  1254528000   
+        99989                     4                       8      5  1234483200   
+        99990                     7                      13      1  1291939200   
+        99991                     2                       5      2  1315440000   
+        99992                     2                       5      5  1284768000   
+        99993                     2                       5      5  1282953600   
+        99994                     2                       5      5  1256428800   
+        99995                     2                       5      5  1254096000   
+        99996                     2                       5      4  1250985600   
+        99997                     2                       5      5  1237766400   
+        99998                     2                       5      4  1237161600   
+        99999                     2                       5      5  1235088000   
+        
+                                                                                Summary  \textbackslash{}
+        0                                                         Good Quality Dog Food   
+        1                                                             Not as Advertised   
+        2                                                         "Delight" says it all   
+        3                                                                Cough Medicine   
+        4                                                                   Great taffy   
+        5                                                                    Nice Taffy   
+        6                                 Great!  Just as good as the expensive brands!   
+        7                                                        Wonderful, tasty taffy   
+        8                                                                    Yay Barley   
+        9                                                              Healthy Dog Food   
+        10                                              The Best Hot Sauce in the World   
+        11                 My cats LOVE this "diet" food better than their regular food   
+        12                                         My Cats Are Not Fans of the New Food   
+        13                                                            fresh and greasy!   
+        14                                                 Strawberry Twizzlers - Yummy   
+        15                                     Lots of twizzlers, just what you expect.   
+        16                                                                   poor taste   
+        17                                                                     Love it!   
+        18                                                           GREAT SWEET CANDY!   
+        19                                                      Home delivered twizlers   
+        20                                                                 Always fresh   
+        21                                                                    TWIZZLERS   
+        22                                                           Delicious product!   
+        23                                                                    Twizzlers   
+        24                                                Please sell these in Mexico!!   
+        25                                                       Twizzlers - Strawberry   
+        26                                                              Nasty No flavor   
+        27                                                  Great Bargain for the Price   
+        28                                                                       YUMMY!   
+        29                                              The Best Hot Sauce in the World   
+        {\ldots}                                                                         {\ldots}   
+        99970                                                              Sooooo Good!   
+        99971                                                         Delicious Noodles   
+        99972                                        Great noodle texture, spicy flavor   
+        99973                                                              Supernoodles   
+        99974                                                         It hurts so good!   
+        99975                                             The best noodle I've ever had   
+        99976                                                                     Spicy   
+        99977                                                                   Yum Yum   
+        99978                                                               Pretty good   
+        99979                                                           for adults only   
+        99980                                              Nong Shim Shin noodles spicy   
+        99981                                        A delicious noodle with good price   
+        99982                                                        Very Tasty Noodles   
+        99983                                                      Good deal at Amazon!   
+        99984                                       To steal a tagline{\ldots}mmm, mmm good!   
+        99985                                                                 nong shim   
+        99986                                        Yummy al dente noodles in my bowl!   
+        99987                                                    Tastes very very awful   
+        99988                          What else can you ask for at a discounted price?   
+        99989                                                         This is THE ramen   
+        99990                                                                over price   
+        99991                                                   wow{\ldots} just plain nasty   
+        99992                                   My new favorite ramen, thanks to amazon   
+        99993                                                               great stuff   
+        99994                                                                Good Stuff   
+        99995                                                                    yummy!   
+        99996                                                         Tastes like More!   
+        99997                                                               Great ramen   
+        99998                                                                   Spicy!!   
+        99999  This spicy noodle cures my cold, upset stomach, and headache every time!   
+        
+                                                                                                                                                                                                                  Text  
+        0      I have bought several of the Vitality canned dog food products and have found them all to be of good quality. The product looks more like a stew than a processed meat and it smells better. My Labr{\ldots}  
+        1               Product arrived labeled as Jumbo Salted Peanuts{\ldots}the peanuts were actually small sized unsalted. Not sure if this was an error or if the vendor intended to represent the product as "Jumbo".  
+        2      This is a confection that has been around a few centuries.  It is a light, pillowy citrus gelatin with nuts - in this case Filberts. And it is cut into tiny squares and then liberally coated with {\ldots}  
+        3      If you are looking for the secret ingredient in Robitussin I believe I have found it.  I got this in addition to the Root Beer Extract I ordered (which was good) and made some cherry soda.  The fl{\ldots}  
+        4                                                                 Great taffy at a great price.  There was a wide assortment of yummy taffy.  Delivery was very quick.  If your a taffy lover, this is a deal.  
+        5      I got a wild hair for taffy and ordered this five pound bag. The taffy was all very enjoyable with many flavors: watermelon, root beer, melon, peppermint, grape, etc. My only complaint is there wa{\ldots}  
+        6      This saltwater taffy had great flavors and was very soft and chewy.  Each candy was individually wrapped well.  None of the candies were stuck together, which did happen in the expensive version, {\ldots}  
+        7                                                                 This taffy is so good.  It is very soft and chewy.  The flavors are amazing.  I would definitely recommend you buying it.  Very satisfying!!  
+        8                                                                          Right now I'm mostly just sprouting this so my cats can eat the grass. They love it. I rotate it around with Wheatgrass and Rye too  
+        9                                                                    This is a very healthy dog food. Good for their digestion. Also good for small puppies. My dog eats her required amount at every feeding.  
+        10     I don't know if it's the cactus or the tequila or just the unique combination of ingredients, but the flavour of this hot sauce makes it one of a kind!  We picked up a bottle once on a trip we wer{\ldots}  
+        11     One of my boys needed to lose some weight and the other didn't.  I put this food on the floor for the chubby guy, and the protein-rich, no by-product food up higher where only my skinny boy can ju{\ldots}  
+        12     My cats have been happily eating Felidae Platinum for more than two years. I just got a new bag and the shape of the food is different. They tried the new food when I first put it in their bowls a{\ldots}  
+        13                                                                                                           good flavor! these came securely packed{\ldots} they were fresh and delicious! i love these Twizzlers!  
+        14                                                                                           The Strawberry Twizzlers are my guilty pleasure - yummy. Six pounds will be around for a while with my son and I.  
+        15                                                 My daughter loves twizzlers and this shipment of six pounds really hit the spot. It's exactly what you would expect{\ldots}six packages of strawberry twizzlers.  
+        16         I love eating them and they are good for watching TV and looking at movies! It is not too sweet. I like to transfer them to a zip lock baggie so they stay fresh so I can take my time eating them.  
+        17                                                               I am very satisfied with my Twizzler purchase.  I shared these with others and we have all enjoyed them.  I will definitely be ordering more.  
+        18     Twizzlers, Strawberry my childhood favorite candy, made in Lancaster Pennsylvania by Y \& S Candies, Inc. one of the oldest confectionery Firms in the United States, now a Subsidiary of the Hershey{\ldots}  
+        19                                                           Candy was delivered very fast and was purchased at a reasonable price.  I was home bound and unable to get to a store so this was perfect for me.  
+        20     My husband is a Twizzlers addict.  We've bought these many times from Amazon because we're government employees living overseas and can't get them in the country we are assigned to.  They've alway{\ldots}  
+        21     I bought these for my husband who is currently overseas. He loves these, and apparently his staff likes them also.<br />There are generous amounts of Twizzlers in each 16-ounce bag, and this was w{\ldots}  
+        22                                                         I can remember buying this candy as a kid and the quality hasn't dropped in all these years. Still a superb product you won't be disappointed with.  
+        23                                                                                                                I love this candy.  After weight watchers I had to cut back but still have a craving for it.  
+        24     I have lived out of the US for over 7 yrs now, and I so miss my Twizzlers!!  When I go back to visit or someone visits me, I always stock up.  All I can say is YUM!<br />Sell these in Mexico and y{\ldots}  
+        25                                                    Product received is as advertised.<br /><br /><a href="http://www.amazon.com/gp/product/B001GVISJM">Twizzlers, Strawberry, 16-Ounce Bags (Pack of 6)</a>  
+        26                                                                                                                    The candy is just red , No flavor . Just  plan and chewy .  I would never buy them again  
+        27        I was so glad Amazon carried these batteries.  I have a hard time finding them elsewhere because they are such a unique size.  I need them for my garage door opener.<br />Great deal for the price.  
+        28     I got this for my Mum who is not diabetic but needs to watch her sugar intake, and my father who simply chooses to limit unnecessary sugar intake - she's the one with the sweet tooth - they both L{\ldots}  
+        29     I don't know if it's the cactus or the tequila or just the unique combination of ingredients, but the flavour of this hot sauce makes it one of a kind!  We picked up a bottle once on a trip we wer{\ldots}  
+        {\ldots}                                                                                                                                                                                                        {\ldots}  
+        99970  If you like spicy Ramen noodles, these are the choice for you!  These are just like the ones my husband used to eat in Korea as a kid, so naturally we love them.  Also, they are pretty expensive i{\ldots}  
+        99971                                                                              It's the same taste as the one I bought in Asian supermarket which can recall me the Chinese style noodles. Very delicious!  
+        99972  First of all, kudos to the Super Saver shipping option that I got on ordering two cases of Nong Shim Shin Ramyun. It's made this the most affordable of this type of superior three-minute ramen one{\ldots}  
+        99973  I love these.  It's hard to think of anything else as cheap that is as warming, satisfying, and delicious.  I use a little more water than called for by the directions, then add a few tablespoons {\ldots}  
+        99974  I will preface this to say that I like spicy things. From salsa to buffalo wings, I usually like the hottest variety of everything. Imagine my surprise then when I heard of this magical "splcy pic{\ldots}  
+        99975                                                                               this is the best noodle I've ever had. Every time I'll add some eggs, vegies. Once you try this, you will never forget it.  
+        99976  I was browsing amazon when I came across these noodles and realized I had not had noodles in ages. I used to eat them all the time. The hard brick type noodles you boil in water for 6 minutes.<br {\ldots}  
+        99977                                                                                                 This is the best tasting, artery clogging, high blood pressure inducing ramen I have ever tasted.  Yumm!  
+        99978  Noodles are fine and filling. They make a simple and cheap meal with some vegetables, slices of meat, and eggs thrown in. The spice packet is a bit overwhelming if you're starting out, so stick to{\ldots}  
+        99979  my first exposure to shin ramyun was about 10 years back at a japanese grocer. all that was available were the shin cups which i picked up as i thought they looked to be the best seller there. at {\ldots}  
+        99980                                           I bought this product strictly on the review of others and they were right, these noodles are great, way better than top ramen.  I will be buying these again.  
+        99981                                                                                   It is hot and delicious. the noodle is very good. although later I found it a little cheaper at local Asian food mart.  
+        99982  What can I say?  They are very spicy, tasty noodles.  My wife loves these noodles and buys them from an asian market that is about 20 miles away from the house.  I'm very happy Amazon sells them f{\ldots}  
+        99983  I have purchased this noodle from local supermarket for years. Due to the rising cost of everything, it got more expensive then ever.  I was please to find that Amazon carry this, with the promoti{\ldots}  
+        99984  This stuff is awesome! It has the right amount of spice (a-lot) and the noodles are much thicker and more flavorful than the standard \$.10 a pack stuff. Don't get me wrong, I love regular Top Rame{\ldots}  
+        99985  Just about any nong shim soup is good. Most of them are very spicy and addicting. I really like the chicken and original spicy noodles{\ldots}Yeah it has MSG but just about every soup does including na{\ldots}  
+        99986  I bought these on a whim because they were a deal of the day.  Boy am I glad that I did.  As a big fan of Maruchan and Top Ramen, I read the reviews and saw that these were very close to the real {\ldots}  
+        99987                                                                   Apparently they used too much synthetic flavors that it just burns your tongue. Also there's too much oil {\ldots} almost made me choke {\ldots}  
+        99988  Stacks of these shin ramyun are stored and sold at each and every Korean airport Duty Free Shops (in a different packing style). I for one am not complaining for buying it at an average of under 1{\ldots}  
+        99989  I been to several places around the world, including Russia and Mongolia. There, if you ask for "ramen", this ramen (Shin Ramen) is the one they give you. it's the best!<br /><br />While by itself{\ldots}  
+        99990                                                                                              This item is really over price, i can buy the same from local Asian grocery stores and it is a lot cheaper.  
+        99991                                      I would have to say the noodles packaged with this product are just plain bad. The spice packet is on par with whats to be expected but the noodles just taste bad.  
+        99992  I originally decided to purchase this particular brand of ramen after seeing all the other positive reviews here on Amazon. I was a bit apprehensive at first, fearing that I wouldn't enjoy it sinc{\ldots}  
+        99993                                                                                      this stuff is awesome.  for best flavor boil it in water, drain the water, add spice packet and then add hot water.  
+        99994                                                                                                                                  I love these noodle.  A little to spicy for the wife but perfct for me.  
+        99995                                                                                                                                     I just love it and will buy another box when I'm done with last one!  
+        99996  My late father in law used to have a rating system for meals: if it was particularly tasty, he'd say "This tastes like more!" That's exactly how I felt the first time I tried a spicy picante ramyu{\ldots}  
+        99997  This is my favorite brand of Korean ramen. It is spicy so if you are not used to eating spicy food, make sure you don't use all of the spice pack. If you add an egg to the soup, it makes a great s{\ldots}  
+        99998  I do like these noodles although, to say they are spicy is somewhat of an understatement. No one else in the family tolerates spicy very well so, seeing these, I was looking forward to an extra li{\ldots}  
+        99999  I love this noodle and have it once or twice a week. The amazing thing is that when I don't feel well because of a cold, a hot bowl of this noodle will cure my upset stomach, headache, and running{\ldots}  
+        
+        [100000 rows x 10 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{data}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{c+c1}{\PYZsh{}dropping duplicates}
+        \PY{n}{data}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{c+c1}{\PYZsh{}dropping na}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 88421 entries, 0 to 99999
+Data columns (total 10 columns):
+Id                        88421 non-null int64
+ProductId                 88421 non-null object
+UserId                    88421 non-null object
+ProfileName               88421 non-null object
+HelpfulnessNumerator      88421 non-null int64
+HelpfulnessDenominator    88421 non-null int64
+Score                     88421 non-null int64
+Time                      88421 non-null int64
+Summary                   88421 non-null object
+Text                      88421 non-null object
+dtypes: int64(5), object(5)
+memory usage: 7.4+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{contraction\PYZus{}mapping} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ain}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{aren}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{are not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{can}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cannot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{cause}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{because}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{could}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{could have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{couldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{could not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{didn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{did not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{doesn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{does not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{do not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hadn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{had not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hasn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{has not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{haven}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{have not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{he}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{he would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{he}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{he will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{he}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{he is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{how}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{how did}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{how}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{how do you}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{how}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{how will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{how}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{how is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I am}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i am}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{isn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{let}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{let us}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ma}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{am}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{madam}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mayn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{may not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{might}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{might have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mightn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{might not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mightn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{might not have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{must}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{must have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mustn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{must not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mustn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{must not have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{needn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{need not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{needn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{need not have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{clock}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{of the clock}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{oughtn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ought not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{oughtn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ought not have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shan}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shall not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sha}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shall not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shan}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shall not have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{she is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{should}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{should have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shouldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{should not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shouldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{should not have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{so}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{so have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{so}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{so as}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{this}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{this is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{that}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{that would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{that}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{that would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{that}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{that is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{there}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{there would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{there}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{there would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{there}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{there is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{here}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{here is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{they have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{to}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{to have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wasn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{was not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{weren}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{were not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{when}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{when is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{when}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{when have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{where}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{where did}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{where}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{where is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{where}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{where have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{why}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{why is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{why}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{why have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{will}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{won}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{will not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{won}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{will not have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{would}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wouldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{would not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wouldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{would not have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you all}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you all would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you all would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you all are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you all have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you would have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you will have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{you have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{contraction\PYZus{}mapping}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} \{"ain't": 'is not',
+         "aren't": 'are not',
+         "can't": 'cannot',
+         "'cause": 'because',
+         "could've": 'could have',
+         "couldn't": 'could not',
+         "didn't": 'did not',
+         "doesn't": 'does not',
+         "don't": 'do not',
+         "hadn't": 'had not',
+         "hasn't": 'has not',
+         "haven't": 'have not',
+         "he'd": 'he would',
+         "he'll": 'he will',
+         "he's": 'he is',
+         "how'd": 'how did',
+         "how'd'y": 'how do you',
+         "how'll": 'how will',
+         "how's": 'how is',
+         "I'd": 'I would',
+         "I'd've": 'I would have',
+         "I'll": 'I will',
+         "I'll've": 'I will have',
+         "I'm": 'I am',
+         "I've": 'I have',
+         "i'd": 'i would',
+         "i'd've": 'i would have',
+         "i'll": 'i will',
+         "i'll've": 'i will have',
+         "i'm": 'i am',
+         "i've": 'i have',
+         "isn't": 'is not',
+         "it'd": 'it would',
+         "it'd've": 'it would have',
+         "it'll": 'it will',
+         "it'll've": 'it will have',
+         "it's": 'it is',
+         "let's": 'let us',
+         "ma'am": 'madam',
+         "mayn't": 'may not',
+         "might've": 'might have',
+         "mightn't": 'might not',
+         "mightn't've": 'might not have',
+         "must've": 'must have',
+         "mustn't": 'must not',
+         "mustn't've": 'must not have',
+         "needn't": 'need not',
+         "needn't've": 'need not have',
+         "o'clock": 'of the clock',
+         "oughtn't": 'ought not',
+         "oughtn't've": 'ought not have',
+         "shan't": 'shall not',
+         "sha'n't": 'shall not',
+         "shan't've": 'shall not have',
+         "she'd": 'she would',
+         "she'd've": 'she would have',
+         "she'll": 'she will',
+         "she'll've": 'she will have',
+         "she's": 'she is',
+         "should've": 'should have',
+         "shouldn't": 'should not',
+         "shouldn't've": 'should not have',
+         "so've": 'so have',
+         "so's": 'so as',
+         "this's": 'this is',
+         "that'd": 'that would',
+         "that'd've": 'that would have',
+         "that's": 'that is',
+         "there'd": 'there would',
+         "there'd've": 'there would have',
+         "there's": 'there is',
+         "here's": 'here is',
+         "they'd": 'they would',
+         "they'd've": 'they would have',
+         "they'll": 'they will',
+         "they'll've": 'they will have',
+         "they're": 'they are',
+         "they've": 'they have',
+         "to've": 'to have',
+         "wasn't": 'was not',
+         "we'd": 'we would',
+         "we'd've": 'we would have',
+         "we'll": 'we will',
+         "we'll've": 'we will have',
+         "we're": 'we are',
+         "we've": 'we have',
+         "weren't": 'were not',
+         "what'll": 'what will',
+         "what'll've": 'what will have',
+         "what're": 'what are',
+         "what's": 'what is',
+         "what've": 'what have',
+         "when's": 'when is',
+         "when've": 'when have',
+         "where'd": 'where did',
+         "where's": 'where is',
+         "where've": 'where have',
+         "who'll": 'who will',
+         "who'll've": 'who will have',
+         "who's": 'who is',
+         "who've": 'who have',
+         "why's": 'why is',
+         "why've": 'why have',
+         "will've": 'will have',
+         "won't": 'will not',
+         "won't've": 'will not have',
+         "would've": 'would have',
+         "wouldn't": 'would not',
+         "wouldn't've": 'would not have',
+         "y'all": 'you all',
+         "y'all'd": 'you all would',
+         "y'all'd've": 'you all would have',
+         "y'all're": 'you all are',
+         "y'all've": 'you all have',
+         "you'd": 'you would',
+         "you'd've": 'you would have',
+         "you'll": 'you will',
+         "you'll've": 'you will have',
+         "you're": 'you are',
+         "you've": 'you have'\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{english}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} 
+        
+        \PY{k}{def} \PY{n+nf}{text\PYZus{}cleaner}\PY{p}{(}\PY{n}{text}\PY{p}{,}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+            \PY{n}{newString} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+            \PY{n}{newString} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{newString}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lxml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{text}
+            \PY{n}{newString} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{([\PYZca{})]*}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{newString}\PY{p}{)}
+            \PY{n}{newString} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{newString}\PY{p}{)}
+            \PY{n}{newString} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n}{contraction\PYZus{}mapping}\PY{p}{[}\PY{n}{t}\PY{p}{]} \PY{k}{if} \PY{n}{t} \PY{o+ow}{in} \PY{n}{contraction\PYZus{}mapping} \PY{k}{else} \PY{n}{t} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{newString}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}    
+            \PY{n}{newString} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{newString}\PY{p}{)}
+            \PY{n}{newString} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[\PYZca{}a\PYZhy{}zA\PYZhy{}Z]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{newString}\PY{p}{)} 
+            \PY{n}{newString} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[m]}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{2,\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{newString}\PY{p}{)}
+            \PY{k}{if}\PY{p}{(}\PY{n}{num}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                \PY{n}{tokens} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{newString}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)} \PY{k}{if} \PY{o+ow}{not} \PY{n}{w} \PY{o+ow}{in} \PY{n}{stop\PYZus{}words}\PY{p}{]}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{tokens}\PY{o}{=}\PY{n}{newString}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+            \PY{n}{long\PYZus{}words}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tokens}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{1}\PY{p}{:}                                                 \PY{c+c1}{\PYZsh{}removing short word}
+                    \PY{n}{long\PYZus{}words}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}   
+            \PY{k}{return} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{long\PYZus{}words}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}call the function}
+        \PY{n}{cleaned\PYZus{}text} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+            \PY{n}{cleaned\PYZus{}text}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{text\PYZus{}cleaner}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{cleaned\PYZus{}text}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}  
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}0}]:} ['bought several vitality canned dog food products found good quality product looks like stew processed meat smells better labrador finicky appreciates product better',
+         'product arrived labeled jumbo salted peanuts peanuts actually small sized unsalted sure error vendor intended represent product jumbo',
+         'confection around centuries light pillowy citrus gelatin nuts case filberts cut tiny squares liberally coated powdered sugar tiny mouthful heaven chewy flavorful highly recommend yummy treat familiar story lewis lion witch wardrobe treat seduces edmund selling brother sisters witch',
+         'looking secret ingredient robitussin believe found got addition root beer extract ordered made cherry soda flavor medicinal',
+         'great taffy great price wide assortment yummy taffy delivery quick taffy lover deal']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}call the function}
+        \PY{n}{cleaned\PYZus{}summary} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+            \PY{n}{cleaned\PYZus{}summary}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{text\PYZus{}cleaner}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{cleaned\PYZus{}summary}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}0}]:} ['good quality dog food',
+         'not as advertised',
+         'delight says it all',
+         'cough medicine',
+         'great taffy',
+         'nice taffy',
+         'great just as good as the expensive brands',
+         'wonderful tasty taffy',
+         'yay barley',
+         'healthy dog food']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{cleaned\PYZus{}text}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{cleaned\PYZus{}summary}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{data}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{n}{text\PYZus{}word\PYZus{}count} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{summary\PYZus{}word\PYZus{}count} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} populate the lists with sentence lengths}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+              \PY{n}{text\PYZus{}word\PYZus{}count}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+              \PY{n}{summary\PYZus{}word\PYZus{}count}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{length\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{text\PYZus{}word\PYZus{}count}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{summary\PYZus{}word\PYZus{}count}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{length\PYZus{}df}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{30}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{cnt}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+            \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+                \PY{n}{cnt}\PY{o}{=}\PY{n}{cnt}\PY{o}{+}\PY{l+m+mi}{1}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{cnt}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9424907471335922
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{max\PYZus{}text\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{30}
+        \PY{n}{max\PYZus{}summary\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{8}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{cleaned\PYZus{}text} \PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{cleaned\PYZus{}summary}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{short\PYZus{}text}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{n}{short\PYZus{}summary}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cleaned\PYZus{}text}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cleaned\PYZus{}summary}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{max\PYZus{}summary\PYZus{}len} \PY{o+ow}{and} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cleaned\PYZus{}text}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{max\PYZus{}text\PYZus{}len}\PY{p}{)}\PY{p}{:}
+                \PY{n}{short\PYZus{}text}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cleaned\PYZus{}text}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{short\PYZus{}summary}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cleaned\PYZus{}summary}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                
+        \PY{n}{df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{short\PYZus{}text}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{short\PYZus{}summary}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sostok }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n}{x} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ eostok}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{n}{x\PYZus{}tr}\PY{p}{,}\PY{n}{x\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}tr}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{o}{=}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{summary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{Tokenizer} 
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{n+nn}{.}\PY{n+nn}{sequence} \PY{k}{import} \PY{n}{pad\PYZus{}sequences}
+        
+        \PY{c+c1}{\PYZsh{}prepare a tokenizer for reviews on training data}
+        \PY{n}{x\PYZus{}tokenizer} \PY{o}{=} \PY{n}{Tokenizer}\PY{p}{(}\PY{p}{)} 
+        \PY{n}{x\PYZus{}tokenizer}\PY{o}{.}\PY{n}{fit\PYZus{}on\PYZus{}texts}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{x\PYZus{}tr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{thresh}\PY{o}{=}\PY{l+m+mi}{4}
+        
+        \PY{n}{cnt}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{n}{tot\PYZus{}cnt}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{n}{freq}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{n}{tot\PYZus{}freq}\PY{o}{=}\PY{l+m+mi}{0}
+        
+        \PY{k}{for} \PY{n}{key}\PY{p}{,}\PY{n}{value} \PY{o+ow}{in} \PY{n}{x\PYZus{}tokenizer}\PY{o}{.}\PY{n}{word\PYZus{}counts}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{tot\PYZus{}cnt}\PY{o}{=}\PY{n}{tot\PYZus{}cnt}\PY{o}{+}\PY{l+m+mi}{1}
+            \PY{n}{tot\PYZus{}freq}\PY{o}{=}\PY{n}{tot\PYZus{}freq}\PY{o}{+}\PY{n}{value}
+            \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{\PYZlt{}}\PY{n}{thresh}\PY{p}{)}\PY{p}{:}
+                \PY{n}{cnt}\PY{o}{=}\PY{n}{cnt}\PY{o}{+}\PY{l+m+mi}{1}
+                \PY{n}{freq}\PY{o}{=}\PY{n}{freq}\PY{o}{+}\PY{n}{value}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f rare words in vocabulary:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{n}{cnt}\PY{o}{/}\PY{n}{tot\PYZus{}cnt}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Coverage of rare words:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{n}{freq}\PY{o}{/}\PY{n}{tot\PYZus{}freq}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\% of rare words in vocabulary: 66.12339930151339
+Total Coverage of rare words: 2.953684513790566
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}prepare a tokenizer for reviews on training data}
+        \PY{n}{x\PYZus{}tokenizer} \PY{o}{=} \PY{n}{Tokenizer}\PY{p}{(}\PY{n}{num\PYZus{}words}\PY{o}{=}\PY{n}{tot\PYZus{}cnt}\PY{o}{\PYZhy{}}\PY{n}{cnt}\PY{p}{)} 
+        \PY{n}{x\PYZus{}tokenizer}\PY{o}{.}\PY{n}{fit\PYZus{}on\PYZus{}texts}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{x\PYZus{}tr}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}convert text sequences into integer sequences}
+        \PY{n}{x\PYZus{}tr\PYZus{}seq}    \PY{o}{=}   \PY{n}{x\PYZus{}tokenizer}\PY{o}{.}\PY{n}{texts\PYZus{}to\PYZus{}sequences}\PY{p}{(}\PY{n}{x\PYZus{}tr}\PY{p}{)} 
+        \PY{n}{x\PYZus{}val\PYZus{}seq}   \PY{o}{=}   \PY{n}{x\PYZus{}tokenizer}\PY{o}{.}\PY{n}{texts\PYZus{}to\PYZus{}sequences}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}padding zero upto maximum length}
+        \PY{n}{x\PYZus{}tr}    \PY{o}{=}   \PY{n}{pad\PYZus{}sequences}\PY{p}{(}\PY{n}{x\PYZus{}tr\PYZus{}seq}\PY{p}{,}  \PY{n}{maxlen}\PY{o}{=}\PY{n}{max\PYZus{}text\PYZus{}len}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x\PYZus{}val}   \PY{o}{=}   \PY{n}{pad\PYZus{}sequences}\PY{p}{(}\PY{n}{x\PYZus{}val\PYZus{}seq}\PY{p}{,} \PY{n}{maxlen}\PY{o}{=}\PY{n}{max\PYZus{}text\PYZus{}len}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}size of vocabulary ( +1 for padding token)}
+        \PY{n}{x\PYZus{}voc}   \PY{o}{=}  \PY{n}{x\PYZus{}tokenizer}\PY{o}{.}\PY{n}{num\PYZus{}words} \PY{o}{+} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{x\PYZus{}voc}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}0}]:} 8440
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}prepare a tokenizer for reviews on training data}
+        \PY{n}{y\PYZus{}tokenizer} \PY{o}{=} \PY{n}{Tokenizer}\PY{p}{(}\PY{p}{)}   
+        \PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{fit\PYZus{}on\PYZus{}texts}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}tr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{thresh}\PY{o}{=}\PY{l+m+mi}{6}
+        
+        \PY{n}{cnt}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{n}{tot\PYZus{}cnt}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{n}{freq}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{n}{tot\PYZus{}freq}\PY{o}{=}\PY{l+m+mi}{0}
+        
+        \PY{k}{for} \PY{n}{key}\PY{p}{,}\PY{n}{value} \PY{o+ow}{in} \PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{word\PYZus{}counts}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{tot\PYZus{}cnt}\PY{o}{=}\PY{n}{tot\PYZus{}cnt}\PY{o}{+}\PY{l+m+mi}{1}
+            \PY{n}{tot\PYZus{}freq}\PY{o}{=}\PY{n}{tot\PYZus{}freq}\PY{o}{+}\PY{n}{value}
+            \PY{k}{if}\PY{p}{(}\PY{n}{value}\PY{o}{\PYZlt{}}\PY{n}{thresh}\PY{p}{)}\PY{p}{:}
+                \PY{n}{cnt}\PY{o}{=}\PY{n}{cnt}\PY{o}{+}\PY{l+m+mi}{1}
+                \PY{n}{freq}\PY{o}{=}\PY{n}{freq}\PY{o}{+}\PY{n}{value}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f rare words in vocabulary:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{n}{cnt}\PY{o}{/}\PY{n}{tot\PYZus{}cnt}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Coverage of rare words:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{n}{freq}\PY{o}{/}\PY{n}{tot\PYZus{}freq}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\% of rare words in vocabulary: 78.12740675541863
+Total Coverage of rare words: 5.3921899389571895
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}prepare a tokenizer for reviews on training data}
+        \PY{n}{y\PYZus{}tokenizer} \PY{o}{=} \PY{n}{Tokenizer}\PY{p}{(}\PY{n}{num\PYZus{}words}\PY{o}{=}\PY{n}{tot\PYZus{}cnt}\PY{o}{\PYZhy{}}\PY{n}{cnt}\PY{p}{)} 
+        \PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{fit\PYZus{}on\PYZus{}texts}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}tr}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}convert text sequences into integer sequences}
+        \PY{n}{y\PYZus{}tr\PYZus{}seq}    \PY{o}{=}   \PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{texts\PYZus{}to\PYZus{}sequences}\PY{p}{(}\PY{n}{y\PYZus{}tr}\PY{p}{)} 
+        \PY{n}{y\PYZus{}val\PYZus{}seq}   \PY{o}{=}   \PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{texts\PYZus{}to\PYZus{}sequences}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{}padding zero upto maximum length}
+        \PY{n}{y\PYZus{}tr}    \PY{o}{=}   \PY{n}{pad\PYZus{}sequences}\PY{p}{(}\PY{n}{y\PYZus{}tr\PYZus{}seq}\PY{p}{,} \PY{n}{maxlen}\PY{o}{=}\PY{n}{max\PYZus{}summary\PYZus{}len}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{y\PYZus{}val}   \PY{o}{=}   \PY{n}{pad\PYZus{}sequences}\PY{p}{(}\PY{n}{y\PYZus{}val\PYZus{}seq}\PY{p}{,} \PY{n}{maxlen}\PY{o}{=}\PY{n}{max\PYZus{}summary\PYZus{}len}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}size of vocabulary}
+        \PY{n}{y\PYZus{}voc}  \PY{o}{=}   \PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{num\PYZus{}words} \PY{o}{+}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{word\PYZus{}counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sostok}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}tr}\PY{p}{)}   
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}0}]:} (42453, 42453)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{ind}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}tr}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{cnt}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{y\PYZus{}tr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                \PY{k}{if} \PY{n}{j}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{cnt}\PY{o}{=}\PY{n}{cnt}\PY{o}{+}\PY{l+m+mi}{1}
+            \PY{k}{if}\PY{p}{(}\PY{n}{cnt}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                \PY{n}{ind}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        
+        \PY{n}{y\PYZus{}tr}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{y\PYZus{}tr}\PY{p}{,}\PY{n}{ind}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{x\PYZus{}tr}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{x\PYZus{}tr}\PY{p}{,}\PY{n}{ind}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{ind}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{cnt}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{y\PYZus{}val}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                \PY{k}{if} \PY{n}{j}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{cnt}\PY{o}{=}\PY{n}{cnt}\PY{o}{+}\PY{l+m+mi}{1}
+            \PY{k}{if}\PY{p}{(}\PY{n}{cnt}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                \PY{n}{ind}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        
+        \PY{n}{y\PYZus{}val}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{,}\PY{n}{ind}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{x\PYZus{}val}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{,}\PY{n}{ind}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K} 
+        \PY{n}{K}\PY{o}{.}\PY{n}{clear\PYZus{}session}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{latent\PYZus{}dim} \PY{o}{=} \PY{l+m+mi}{300}
+        \PY{n}{embedding\PYZus{}dim}\PY{o}{=}\PY{l+m+mi}{100}
+        
+        \PY{c+c1}{\PYZsh{} Encoder}
+        \PY{n}{encoder\PYZus{}inputs} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{max\PYZus{}text\PYZus{}len}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}embedding layer}
+        \PY{n}{enc\PYZus{}emb} \PY{o}{=}  \PY{n}{Embedding}\PY{p}{(}\PY{n}{x\PYZus{}voc}\PY{p}{,} \PY{n}{embedding\PYZus{}dim}\PY{p}{,}\PY{n}{trainable}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{(}\PY{n}{encoder\PYZus{}inputs}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}encoder lstm 1}
+        \PY{n}{encoder\PYZus{}lstm1} \PY{o}{=} \PY{n}{LSTM}\PY{p}{(}\PY{n}{latent\PYZus{}dim}\PY{p}{,}\PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{return\PYZus{}state}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{dropout}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{n}{recurrent\PYZus{}dropout}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+        \PY{n}{encoder\PYZus{}output1}\PY{p}{,} \PY{n}{state\PYZus{}h1}\PY{p}{,} \PY{n}{state\PYZus{}c1} \PY{o}{=} \PY{n}{encoder\PYZus{}lstm1}\PY{p}{(}\PY{n}{enc\PYZus{}emb}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}encoder lstm 2}
+        \PY{n}{encoder\PYZus{}lstm2} \PY{o}{=} \PY{n}{LSTM}\PY{p}{(}\PY{n}{latent\PYZus{}dim}\PY{p}{,}\PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{return\PYZus{}state}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{dropout}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{n}{recurrent\PYZus{}dropout}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+        \PY{n}{encoder\PYZus{}output2}\PY{p}{,} \PY{n}{state\PYZus{}h2}\PY{p}{,} \PY{n}{state\PYZus{}c2} \PY{o}{=} \PY{n}{encoder\PYZus{}lstm2}\PY{p}{(}\PY{n}{encoder\PYZus{}output1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}encoder lstm 3}
+        \PY{n}{encoder\PYZus{}lstm3}\PY{o}{=}\PY{n}{LSTM}\PY{p}{(}\PY{n}{latent\PYZus{}dim}\PY{p}{,} \PY{n}{return\PYZus{}state}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{dropout}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{n}{recurrent\PYZus{}dropout}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+        \PY{n}{encoder\PYZus{}outputs}\PY{p}{,} \PY{n}{state\PYZus{}h}\PY{p}{,} \PY{n}{state\PYZus{}c}\PY{o}{=} \PY{n}{encoder\PYZus{}lstm3}\PY{p}{(}\PY{n}{encoder\PYZus{}output2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set up the decoder, using `encoder\PYZus{}states` as initial state.}
+        \PY{n}{decoder\PYZus{}inputs} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}embedding layer}
+        \PY{n}{dec\PYZus{}emb\PYZus{}layer} \PY{o}{=} \PY{n}{Embedding}\PY{p}{(}\PY{n}{y\PYZus{}voc}\PY{p}{,} \PY{n}{embedding\PYZus{}dim}\PY{p}{,}\PY{n}{trainable}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{dec\PYZus{}emb} \PY{o}{=} \PY{n}{dec\PYZus{}emb\PYZus{}layer}\PY{p}{(}\PY{n}{decoder\PYZus{}inputs}\PY{p}{)}
+        
+        \PY{n}{decoder\PYZus{}lstm} \PY{o}{=} \PY{n}{LSTM}\PY{p}{(}\PY{n}{latent\PYZus{}dim}\PY{p}{,} \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{return\PYZus{}state}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{dropout}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{n}{recurrent\PYZus{}dropout}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        \PY{n}{decoder\PYZus{}outputs}\PY{p}{,}\PY{n}{decoder\PYZus{}fwd\PYZus{}state}\PY{p}{,} \PY{n}{decoder\PYZus{}back\PYZus{}state} \PY{o}{=} \PY{n}{decoder\PYZus{}lstm}\PY{p}{(}\PY{n}{dec\PYZus{}emb}\PY{p}{,}\PY{n}{initial\PYZus{}state}\PY{o}{=}\PY{p}{[}\PY{n}{state\PYZus{}h}\PY{p}{,} \PY{n}{state\PYZus{}c}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Attention layer}
+        \PY{n}{attn\PYZus{}layer} \PY{o}{=} \PY{n}{AttentionLayer}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{attention\PYZus{}layer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{attn\PYZus{}out}\PY{p}{,} \PY{n}{attn\PYZus{}states} \PY{o}{=} \PY{n}{attn\PYZus{}layer}\PY{p}{(}\PY{p}{[}\PY{n}{encoder\PYZus{}outputs}\PY{p}{,} \PY{n}{decoder\PYZus{}outputs}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Concat attention input and decoder LSTM output}
+        \PY{n}{decoder\PYZus{}concat\PYZus{}input} \PY{o}{=} \PY{n}{Concatenate}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{concat\PYZus{}layer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{p}{[}\PY{n}{decoder\PYZus{}outputs}\PY{p}{,} \PY{n}{attn\PYZus{}out}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}dense layer}
+        \PY{n}{decoder\PYZus{}dense} \PY{o}{=}  \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{y\PYZus{}voc}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{decoder\PYZus{}outputs} \PY{o}{=} \PY{n}{decoder\PYZus{}dense}\PY{p}{(}\PY{n}{decoder\PYZus{}concat\PYZus{}input}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Define the model }
+        \PY{n}{model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{p}{[}\PY{n}{encoder\PYZus{}inputs}\PY{p}{,} \PY{n}{decoder\PYZus{}inputs}\PY{p}{]}\PY{p}{,} \PY{n}{decoder\PYZus{}outputs}\PY{p}{)}
+        
+        \PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From /opt/conda/lib/python3.6/site-packages/tensorflow/python/ops/resource\_variable\_ops.py:435: colocate\_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /opt/conda/lib/python3.6/site-packages/tensorflow/python/keras/backend.py:4010: calling dropout (from tensorflow.python.ops.nn\_ops) with keep\_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep\_prob`. Rate should be set to `rate = 1 - keep\_prob`.
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                    Output Shape         Param \#     Connected to                     
+==================================================================================================
+input\_1 (InputLayer)            (None, 30)           0                                            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+embedding (Embedding)           (None, 30, 100)      844000      input\_1[0][0]                    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm (LSTM)                     [(None, 30, 300), (N 481200      embedding[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+input\_2 (InputLayer)            (None, None)         0                                            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm\_1 (LSTM)                   [(None, 30, 300), (N 721200      lstm[0][0]                       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+embedding\_1 (Embedding)         (None, None, 100)    198900      input\_2[0][0]                    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm\_2 (LSTM)                   [(None, 30, 300), (N 721200      lstm\_1[0][0]                     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm\_3 (LSTM)                   [(None, None, 300),  481200      embedding\_1[0][0]                
+                                                                 lstm\_2[0][1]                     
+                                                                 lstm\_2[0][2]                     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+attention\_layer (AttentionLayer [(None, None, 300),  180300      lstm\_2[0][0]                     
+                                                                 lstm\_3[0][0]                     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+concat\_layer (Concatenate)      (None, None, 600)    0           lstm\_3[0][0]                     
+                                                                 attention\_layer[0][0]            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+time\_distributed (TimeDistribut (None, None, 1989)   1195389     concat\_layer[0][0]               
+==================================================================================================
+Total params: 4,823,389
+Trainable params: 4,823,389
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rmsprop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sparse\PYZus{}categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{es} \PY{o}{=} \PY{n}{EarlyStopping}\PY{p}{(}\PY{n}{monitor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{patience}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{history}\PY{o}{=}\PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{[}\PY{n}{x\PYZus{}tr}\PY{p}{,}\PY{n}{y\PYZus{}tr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{y\PYZus{}tr}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{y\PYZus{}tr}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{p}{,}\PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}\PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{es}\PY{p}{]}\PY{p}{,}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{p}{[}\PY{n}{x\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}val}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train on 41346 samples, validate on 4588 samples
+WARNING:tensorflow:From /opt/conda/lib/python3.6/site-packages/tensorflow/python/ops/math\_ops.py:3066: to\_int32 (from tensorflow.python.ops.math\_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+Epoch 1/50
+41346/41346 [==============================] - 85s 2ms/sample - loss: 2.8152 - val\_loss: 2.5780
+Epoch 2/50
+41346/41346 [==============================] - 79s 2ms/sample - loss: 2.4859 - val\_loss: 2.4072
+Epoch 3/50
+41346/41346 [==============================] - 81s 2ms/sample - loss: 2.3259 - val\_loss: 2.3232
+Epoch 4/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 2.2281 - val\_loss: 2.2534
+Epoch 5/50
+41346/41346 [==============================] - 79s 2ms/sample - loss: 2.1604 - val\_loss: 2.1862
+Epoch 6/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 2.1065 - val\_loss: 2.1549
+Epoch 7/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 2.0616 - val\_loss: 2.1177
+Epoch 8/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 2.0202 - val\_loss: 2.0992
+Epoch 9/50
+41346/41346 [==============================] - 79s 2ms/sample - loss: 1.9835 - val\_loss: 2.0822
+Epoch 10/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 1.9476 - val\_loss: 2.0636
+Epoch 11/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 1.9145 - val\_loss: 2.0606
+Epoch 12/50
+41346/41346 [==============================] - 79s 2ms/sample - loss: 1.8826 - val\_loss: 2.0672
+Epoch 13/50
+41346/41346 [==============================] - 79s 2ms/sample - loss: 1.8553 - val\_loss: 2.0444
+Epoch 14/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 1.8267 - val\_loss: 2.0422
+Epoch 15/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 1.7980 - val\_loss: 2.0456
+Epoch 16/50
+41346/41346 [==============================] - 79s 2ms/sample - loss: 1.7745 - val\_loss: 2.0409
+Epoch 17/50
+41346/41346 [==============================] - 79s 2ms/sample - loss: 1.7518 - val\_loss: 2.0374
+Epoch 18/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 1.7299 - val\_loss: 2.0434
+Epoch 19/50
+41346/41346 [==============================] - 80s 2ms/sample - loss: 1.7070 - val\_loss: 2.0398
+Epoch 00019: early stopping
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{history}\PY{o}{.}\PY{n}{history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{history}\PY{o}{.}\PY{n}{history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{reverse\PYZus{}target\PYZus{}word\PYZus{}index}\PY{o}{=}\PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{index\PYZus{}word}
+        \PY{n}{reverse\PYZus{}source\PYZus{}word\PYZus{}index}\PY{o}{=}\PY{n}{x\PYZus{}tokenizer}\PY{o}{.}\PY{n}{index\PYZus{}word}
+        \PY{n}{target\PYZus{}word\PYZus{}index}\PY{o}{=}\PY{n}{y\PYZus{}tokenizer}\PY{o}{.}\PY{n}{word\PYZus{}index}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{} Encode the input sequence to get the feature vector}
+        \PY{n}{encoder\PYZus{}model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{inputs}\PY{o}{=}\PY{n}{encoder\PYZus{}inputs}\PY{p}{,}\PY{n}{outputs}\PY{o}{=}\PY{p}{[}\PY{n}{encoder\PYZus{}outputs}\PY{p}{,} \PY{n}{state\PYZus{}h}\PY{p}{,} \PY{n}{state\PYZus{}c}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Decoder setup}
+        \PY{c+c1}{\PYZsh{} Below tensors will hold the states of the previous time step}
+        \PY{n}{decoder\PYZus{}state\PYZus{}input\PYZus{}h} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{latent\PYZus{}dim}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+        \PY{n}{decoder\PYZus{}state\PYZus{}input\PYZus{}c} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{latent\PYZus{}dim}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+        \PY{n}{decoder\PYZus{}hidden\PYZus{}state\PYZus{}input} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{max\PYZus{}text\PYZus{}len}\PY{p}{,}\PY{n}{latent\PYZus{}dim}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Get the embeddings of the decoder sequence}
+        \PY{n}{dec\PYZus{}emb2}\PY{o}{=} \PY{n}{dec\PYZus{}emb\PYZus{}layer}\PY{p}{(}\PY{n}{decoder\PYZus{}inputs}\PY{p}{)} 
+        \PY{c+c1}{\PYZsh{} To predict the next word in the sequence, set the initial states to the states from the previous time step}
+        \PY{n}{decoder\PYZus{}outputs2}\PY{p}{,} \PY{n}{state\PYZus{}h2}\PY{p}{,} \PY{n}{state\PYZus{}c2} \PY{o}{=} \PY{n}{decoder\PYZus{}lstm}\PY{p}{(}\PY{n}{dec\PYZus{}emb2}\PY{p}{,} \PY{n}{initial\PYZus{}state}\PY{o}{=}\PY{p}{[}\PY{n}{decoder\PYZus{}state\PYZus{}input\PYZus{}h}\PY{p}{,} \PY{n}{decoder\PYZus{}state\PYZus{}input\PYZus{}c}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}attention inference}
+        \PY{n}{attn\PYZus{}out\PYZus{}inf}\PY{p}{,} \PY{n}{attn\PYZus{}states\PYZus{}inf} \PY{o}{=} \PY{n}{attn\PYZus{}layer}\PY{p}{(}\PY{p}{[}\PY{n}{decoder\PYZus{}hidden\PYZus{}state\PYZus{}input}\PY{p}{,} \PY{n}{decoder\PYZus{}outputs2}\PY{p}{]}\PY{p}{)}
+        \PY{n}{decoder\PYZus{}inf\PYZus{}concat} \PY{o}{=} \PY{n}{Concatenate}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{concat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{p}{[}\PY{n}{decoder\PYZus{}outputs2}\PY{p}{,} \PY{n}{attn\PYZus{}out\PYZus{}inf}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} A dense softmax layer to generate prob dist. over the target vocabulary}
+        \PY{n}{decoder\PYZus{}outputs2} \PY{o}{=} \PY{n}{decoder\PYZus{}dense}\PY{p}{(}\PY{n}{decoder\PYZus{}inf\PYZus{}concat}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{} Final decoder model}
+        \PY{n}{decoder\PYZus{}model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}
+            \PY{p}{[}\PY{n}{decoder\PYZus{}inputs}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{decoder\PYZus{}hidden\PYZus{}state\PYZus{}input}\PY{p}{,}\PY{n}{decoder\PYZus{}state\PYZus{}input\PYZus{}h}\PY{p}{,} \PY{n}{decoder\PYZus{}state\PYZus{}input\PYZus{}c}\PY{p}{]}\PY{p}{,}
+            \PY{p}{[}\PY{n}{decoder\PYZus{}outputs2}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{state\PYZus{}h2}\PY{p}{,} \PY{n}{state\PYZus{}c2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{def} \PY{n+nf}{decode\PYZus{}sequence}\PY{p}{(}\PY{n}{input\PYZus{}seq}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Encode the input as state vectors.}
+            \PY{n}{e\PYZus{}out}\PY{p}{,} \PY{n}{e\PYZus{}h}\PY{p}{,} \PY{n}{e\PYZus{}c} \PY{o}{=} \PY{n}{encoder\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{input\PYZus{}seq}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Generate empty target sequence of length 1.}
+            \PY{n}{target\PYZus{}seq} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Populate the first word of target sequence with the start word.}
+            \PY{n}{target\PYZus{}seq}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{target\PYZus{}word\PYZus{}index}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sostok}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+            \PY{n}{stop\PYZus{}condition} \PY{o}{=} \PY{k+kc}{False}
+            \PY{n}{decoded\PYZus{}sentence} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{while} \PY{o+ow}{not} \PY{n}{stop\PYZus{}condition}\PY{p}{:}
+              
+                \PY{n}{output\PYZus{}tokens}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{n}{decoder\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{[}\PY{n}{target\PYZus{}seq}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{e\PYZus{}out}\PY{p}{,} \PY{n}{e\PYZus{}h}\PY{p}{,} \PY{n}{e\PYZus{}c}\PY{p}{]}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Sample a token}
+                \PY{n}{sampled\PYZus{}token\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{output\PYZus{}tokens}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{n}{sampled\PYZus{}token} \PY{o}{=} \PY{n}{reverse\PYZus{}target\PYZus{}word\PYZus{}index}\PY{p}{[}\PY{n}{sampled\PYZus{}token\PYZus{}index}\PY{p}{]}
+                
+                \PY{k}{if}\PY{p}{(}\PY{n}{sampled\PYZus{}token}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eostok}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{decoded\PYZus{}sentence} \PY{o}{+}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{sampled\PYZus{}token}
+        
+                \PY{c+c1}{\PYZsh{} Exit condition: either hit max length or find stop word.}
+                \PY{k}{if} \PY{p}{(}\PY{n}{sampled\PYZus{}token} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eostok}\PY{l+s+s1}{\PYZsq{}}  \PY{o+ow}{or} \PY{n+nb}{len}\PY{p}{(}\PY{n}{decoded\PYZus{}sentence}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{p}{(}\PY{n}{max\PYZus{}summary\PYZus{}len}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{stop\PYZus{}condition} \PY{o}{=} \PY{k+kc}{True}
+        
+                \PY{c+c1}{\PYZsh{} Update the target sequence (of length 1).}
+                \PY{n}{target\PYZus{}seq} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                \PY{n}{target\PYZus{}seq}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{sampled\PYZus{}token\PYZus{}index}
+        
+                \PY{c+c1}{\PYZsh{} Update internal states}
+                \PY{n}{e\PYZus{}h}\PY{p}{,} \PY{n}{e\PYZus{}c} \PY{o}{=} \PY{n}{h}\PY{p}{,} \PY{n}{c}
+        
+            \PY{k}{return} \PY{n}{decoded\PYZus{}sentence}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{def} \PY{n+nf}{seq2summary}\PY{p}{(}\PY{n}{input\PYZus{}seq}\PY{p}{)}\PY{p}{:}
+            \PY{n}{newString}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{input\PYZus{}seq}\PY{p}{:}
+                \PY{k}{if}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{!=}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{i}\PY{o}{!=}\PY{n}{target\PYZus{}word\PYZus{}index}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sostok}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o+ow}{and} \PY{n}{i}\PY{o}{!=}\PY{n}{target\PYZus{}word\PYZus{}index}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eostok}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{newString}\PY{o}{=}\PY{n}{newString}\PY{o}{+}\PY{n}{reverse\PYZus{}target\PYZus{}word\PYZus{}index}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{return} \PY{n}{newString}
+        
+        \PY{k}{def} \PY{n+nf}{seq2text}\PY{p}{(}\PY{n}{input\PYZus{}seq}\PY{p}{)}\PY{p}{:}
+            \PY{n}{newString}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{input\PYZus{}seq}\PY{p}{:}
+                \PY{k}{if}\PY{p}{(}\PY{n}{i}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{newString}\PY{o}{=}\PY{n}{newString}\PY{o}{+}\PY{n}{reverse\PYZus{}source\PYZus{}word\PYZus{}index}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{return} \PY{n}{newString}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Review:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{seq2text}\PY{p}{(}\PY{n}{x\PYZus{}tr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Original summary:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{seq2summary}\PY{p}{(}\PY{n}{y\PYZus{}tr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted summary:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{decode\PYZus{}sequence}\PY{p}{(}\PY{n}{x\PYZus{}tr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{max\PYZus{}text\PYZus{}len}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Review: gave caffeine shakes heart anxiety attack plus tastes unbelievably bad stick coffee tea soda thanks 
+Original summary: hour 
+Predicted summary:  not worth the money
+
+
+Review: got great course good belgian chocolates better 
+Original summary: would like to give it stars but 
+Predicted summary:  good
+
+
+Review: one best flavored coffees tried usually like flavored coffees one great serve company love 
+Original summary: delicious 
+Predicted summary:  great coffee
+
+
+Review: salt separate area pain makes hard regulate salt putting like salt go ahead get product 
+Original summary: tastes ok packaging 
+Predicted summary:  salt
+
+
+Review: really like product super easy order online delivered much cheaper buying gas station stocking good long drives 
+Original summary: turkey jerky is great 
+Predicted summary:  great product
+
+
+Review: best salad dressing delivered promptly quantities last vidalia onion dressing compares made oak hill farms sometimes find costco order front door want even orders cut shipping costs 
+Original summary: my favorite salad dressing 
+Predicted summary:  great product
+
+
+Review: think sitting around warehouse long time took long time send got tea tasted like cardboard red rasberry leaf tea know supposed taste like 
+Original summary: stale 
+Predicted summary:  not as good as
+
+
+Review: year old cat special diet digestive problems also diabetes stopped eating usual special formula food tried different kinds catfood one liked easy digestion diabetes thank newman 
+Original summary: wonderful 
+Predicted summary:  cat food
+
+
+Review: always perfect snack dog loves knows exactly starts ask time evening gets greenie snack thank excellent product fast delivery 
+Original summary: greenies buddy treat 
+Predicted summary:  great treat
+
+
+Review: dog loves tiny treats keep one car one house 
+Original summary: dog loves them 
+Predicted summary:  my dog loves these
+
+
+Review: liked coffee much subscribing dark rich smooth 
+Original summary: makes great cup of java 
+Predicted summary:  good coffee
+
+
+Review: far dog tried chicken peanut butter flavor absolutely loves love natural makes happy giving dog something healthy treats small soft big plus calories 
+Original summary: love zuke mini naturals 
+Predicted summary:  my dog loves these
+
+
+Review: absolutely delicious satisfy something sweet really filling great early morning time make breakfast great afternoon snack work feeling sluggish 
+Original summary: protein bar 
+Predicted summary:  yummy
+
+
+Review: aware decaf coffee although showed search decaf cups intended purchase gift kept recipient drink caffeine favorite means 
+Original summary: not decaf 
+Predicted summary:  decaf decaf
+
+
+Review: wonderful wrote perfect iced cookie one pen writing cookies names happy ca 
+Original summary: cookie 
+Predicted summary:  delicious
+
+
+Review: truffle oil quite good prefer brand france urbani italy expensive oh delicious tried black white good black bit stronger pungent event healthy alternative butter enjoy 
+Original summary: delicious but not the best 
+Predicted summary:  great flavor
+
+
+Review: enjoy coffee office split right middle loving think worth try order regularly 
+Original summary: hit or miss 
+Predicted summary:  good coffee
+
+
+Review: husband gluten free food several years tried several different bread mixes first actually enjoys buying amazon saves loaf 
+Original summary: really good gluten free bread 
+Predicted summary:  great gluten free bread
+
+
+Review: hubby eats says good snacks morning done apple flavor 
+Original summary: really good nice snack 
+Predicted summary:  great snack
+
+
+Review: waste money disgusting product chocolate taste tastes like plastic lining paper carton using milk treated ultra high temperatures like fresh milk go get fresh milk hershey syrup want chocolate milk 
+Original summary: please do not waste your money 
+Predicted summary:  yuck
+
+
+Review: absolutely loves apple chicken happy hips looks forward one morning one night gets soooo excited would eat allowed 
+Original summary: healthy treats 
+Predicted summary:  great for training
+
+
+Review: strong much flavor little aroma tried purchase another time similiar brands met standards expected 
+Original summary: no flavor 
+Predicted summary:  san francisco bay coffee
+
+
+Review: company wanted chose order anyway 
+Original summary: water 
+Predicted summary:  not good
+
+
+Review: introduced number people hooked best sour gummy ever great flavors got great price 
+Original summary: new favorite 
+Predicted summary:  best licorice
+
+
+Review: new price attractive however tastes horrible maybe old zico coconut water brands might find acceptable 
+Original summary: do not be by the price 
+Predicted summary:  terrible
+
+
+Review: sure ever going buy product way expensive market price 
+Original summary: too expensive 
+Predicted summary:  good value
+
+
+Review: flavor normally find local stores plus buy bulk things take savings add veggies even stir egg noodles cook add nutrition quick meals lot extra 
+Original summary: good value 
+Predicted summary:  great deal
+
+
+Review: order tea labeled decaff must caffeine residue levels tested tea caffeine decaff non decaff tea anywhere caffeine caffeine caffeinated tea caffeine slightly less naturally present tea leaf 
+Original summary: caffeine is not 
+Predicted summary:  not as good as
+
+
+Review: excellent babies toddler really best offer little one delicious rich vitamins calcium protein low fat sorry products available website 
+Original summary: excellent product for babies and toddler 
+Predicted summary:  great product
+
+
+Review: purchased item dented would bet run dented product clearing ship ones 
+Original summary: sometimes dented 
+Predicted summary:  dented cans
+
+
+Review: almost tastes like mini blueberry pie love one favorite thoroughly fallen love 
+Original summary: excellent love the blueberry pecan 
+Predicted summary:  yummy
+
+
+Review: dog loves keeps busy minutes long time chew hound 
+Original summary: chew away 
+Predicted summary:  dog loves it
+
+
+Review: plant came quickly looks great office nice pot plant thriving well 
+Original summary: very nice office plant 
+Predicted summary:  plant
+
+
+Review: dog loves lickety stik bacon flavor since likes much plan getting flavors great liquid treat dog highly recommend lickety stik 
+Original summary: great dog treat 
+Predicted summary:  dog loves them
+
+
+Review: great toy dogs chew everything else little literally eats toys one toys yet destroy loves carries around everywhere got rex cutest thing 
+Original summary: good for chewers 
+Predicted summary:  dogs love it
+
+
+Review: really search good deals tea tea great price tea amazon almost cup price cup coffee herbal varieties low caffine good option wife used dinner coffe 
+Original summary: great price for great tea 
+Predicted summary:  great tea
+
+
+Review: pricey essentially small bag hard crumbs maybe dog spoiled treats like third class treats definitely bottom doggie treat often simply walk away glad people like buying 
+Original summary: waste of money 
+Predicted summary:  not for dogs
+
+
+Review: little pricey consider sugar low cal caffine really rich flavor best chai ever found 
+Original summary: fabulous product 
+Predicted summary:  delicious
+
+
+Review: loves taste beef freeze dried dog treats use training really works 
+Original summary: dog lover 
+Predicted summary:  great training treat
+
+
+Review: three dogs cairn terriers year old border collie proud greenies like taste helps keep gums teeth good shape 
+Original summary: our dogs love greenies 
+Predicted summary:  greenies
+
+
+Review: good soft drink smooth strawberry cream soda tasty 
+Original summary: good stuff 
+Predicted summary:  good stuff
+
+
+Review: item arrived sugar free shipped regular version caramel syrup small internal sticker bottle stated sugar free although company label bottle stated regular version 
+Original summary: wrong item 
+Predicted summary:  not as good as
+
+
+Review: like strong coffee coffee rated found weak sickening taste 
+Original summary: disapointed 
+Predicted summary:  not bad
+
+
+Review: saw peanut butter chocolate cereal knew try pleased eat chocolate breakfast feel guilty two kids love cereal well great eat alone favorite milk product yogurt mix homemade granola well 
+Original summary: the yummy 
+Predicted summary:  yummy
+
+
+Review: begging time loves used buy small bottle buying every weeks since saw oz buying last lot longer gas money cheaper buy online 
+Original summary: my dog loves it 
+Predicted summary:  great product
+
+
+Review: true also need decent scale tried caviar recipe everything worked perfectly first try fun easy make kit comes large enough samples looks like good uses 
+Original summary: great to 
+Predicted summary:  works great
+
+
+Review: dog really likes treats like buy run mill treats loaded fat fillers continue buy 
+Original summary: buddy biscuits 
+Predicted summary:  my dog loves these
+
+
+Review: tulsi green tea great good iced tea well 
+Original summary: green tea 
+Predicted summary:  green tea
+
+
+Review: always put something market couple poof gone best tasting product pepsi 
+Original summary: best taste 
+Predicted summary:  great taste
+
+
+Review: like tomatoes fresh flavorful also come carton welcome alternative metal cans impart flavor sometimes lined plastic containing 
+Original summary: yummy tomatoes good packaging 
+Predicted summary:  good product
+
+
+Review: great get habit forming careful bought whole case save overall versus going supermarket rich dark chocolate crisp cookie worth every penny oreo eat heart 
+Original summary: delicious 
+Predicted summary:  love these
+
+
+Review: else say arrived promptly perhaps time expected expiration date like next day good go 
+Original summary: baby loves it 
+Predicted summary:  not what expected
+
+
+Review: bought local recently advertised cheesy flavor detectable product even salt flavor avoid product 
+Original summary: no cheese flavor 
+Predicted summary:  good but not great
+
+
+Review: big volume coffee morning one great 
+Original summary: great morning coffee 
+Predicted summary:  great coffee
+
+
+Review: drank try keep awake fell asleep minutes drinking feel anything 
+Original summary: it made me fall 
+Predicted summary:  great taste
+
+
+Review: drink cups day verona italian french roast coffee wanted try lower acid version brand coffee smells tastes like vinegar totally unpalatable better drinking water acid coffee bothers 
+Original summary: single worst coffee ever 
+Predicted summary:  not very good
+
+
+Review: getting price however afraid stocking anymore reduced price think one trying eat crackers low calorie string cheese breakfast every total calories put breakfast baggie go 
+Original summary: am addicted to these 
+Predicted summary:  not as good as expected
+
+
+Review: first time using fondarific fondant general one really easy use baby shower cake worked indicated also colored made two tier cake final product looked great greasy 
+Original summary: easy to use 
+Predicted summary:  great product
+
+
+Review: work home drink cups cup coffee day good tasting coffee lowest price cup market 
+Original summary: great coffee great price 
+Predicted summary:  great coffee
+
+
+Review: guys say natural really tastes great pleasantly surprised stand flavor carbonated think would even better product time come fed sweet juices aftertaste make obvious really natural switch really gets vote 
+Original summary: great taste all natural 
+Predicted summary:  not very good
+
+
+Review: product good goes long way quite good one dd good product less 
+Original summary: very good 
+Predicted summary:  good stuff
+
+
+Review: tea wonderful soothing even soothing get shipped house found hard find decaffeinated tea grocery store much easier 
+Original summary: decaffeinated french vanilla tea yummy 
+Predicted summary:  great tea
+
+
+Review: wow little calorie espresso sugar serve cold delicious little shot espresso sugar overly sweet sugar helps offset taste espresso caffe bitter sweet tastes good really gave afternoon kick pants 
+Original summary: nice little pick me up 
+Predicted summary:  best water ever
+
+
+Review: mayonnaise delicious side side taste test would give hellman edge hellman richer taste 
+Original summary: excellent but 
+Predicted summary:  good stuff
+
+
+Review: love medium full flavored roast smooth taste bitter acidic taste excellent coffee good value also try timothy kona good also 
+Original summary: wonderful coffee 
+Predicted summary:  great coffee
+
+
+Review: nice item chunks meat good gravy cat fond varieties nice little treat nonetheless think item bit pricy per ounce 
+Original summary: nice but pricey 
+Predicted summary:  good cat food
+
+
+Review: bought cookies gifts open last long good make great gifts would definitely buy 
+Original summary: mouth watery cookies 
+Predicted summary:  cookies
+
+
+Review: great price fast shipping best chips better ingredients less calories snack foods plus taste like real chips 
+Original summary: pop chips are the best 
+Predicted summary:  great chips
+
+
+Review: taco bell chipotle sauce bold flavorful tried chicken wings tacos salad made dish extremely tasty glad sampled new sauce staple condiment 
+Original summary: bold flavor 
+Predicted summary:  great taste
+
+
+Review: bought seeds make centerpieces really surprised fast grow planted seeds potting soil without ny preparation anything kept watering days super tall ready displayed centerpieces perfect 
+Original summary: perfect for in days 
+Predicted summary:  great seeds
+
+
+Review: every time need sun dried tomatoes local grocery stores conveniently small pouches ensure always hand called recipe 
+Original summary: sun dried tomato bliss 
+Predicted summary:  great product
+
+
+Review: love soup eat plain use recipe cannot find area glad amazon 
+Original summary: soup chicken cheese 
+Predicted summary:  soup
+
+
+Review: size quite good dog training smell strong cannot put open bag must seal everytime gave treat otherwise dog stand trying fetch believe taste great puppy purchase sure 
+Original summary: strong smell and my puppy loves it 
+Predicted summary:  my dog loves these
+
+
+Review: love chips auto order every months taste great whole bag calories bag every day sure helped weight loss little bags eat huge amount 
+Original summary: great purchase 
+Predicted summary:  great chips
+
+
+Review: many kit wines cost three four times made many kits find fine table wine recommend adding water five gallon mark flavor 
+Original summary: good wine 
+Predicted summary:  great product
+
+
+Review: sooo much pepper heavy salt reminds adams trick food cannot eat seriously fresh nuts seasoned 
+Original summary: over the top seasoning 
+Predicted summary:  great salt
+
+
+Review: loved brand best vanilla flavor others tried would buy better price 
+Original summary: wolfgang puck coffee vanilla 
+Predicted summary:  great taste
+
+
+Review: another brand cinammon carried amazon much better tasting brand maybe packaging part problem simple plastic bag tie amazon brand comes carefully set plastic box 
+Original summary: edible have had much better 
+Predicted summary:  not as good as expected
+
+
+Review: throw pack one actually taste bad especially compared orange tangerine like carbonation adds juice flavors need work switch drinks best worst watermelon strawberry kiwi berry black cherry orange tangerine 
+Original summary: my favorite of the four tried 
+Predicted summary:  tastes like
+
+
+Review: daughter drinking since months old months old still loves snack time healthy delicious great addition menu 
+Original summary: great snack 
+Predicted summary:  great snack
+
+
+Review: live guinea africa order products delivered boat every months sometimes disappointed time zero calories zero carbs taste great price zero delivery costs prime ordered different flavors one favorite love 
+Original summary: love it 
+Predicted summary:  great product
+
+
+Review: purchased larger size love size perfect keep purse snack especially times others dessert snack cannot eat must gluten free spouse touch diet food loves 
+Original summary: cannot get enough 
+Predicted summary:  great snack
+
+
+Review: always house drink favorite mix sprite oh good every day mind larger bottles use much bring 
+Original summary: am an adult still love this 
+Predicted summary:  great taste
+
+
+Review: ginger snaps overpowering ginger go great milk really enjoyed house great buy affordable compared alternative diet foods last least week store well 
+Original summary: you can eat ginger again 
+Predicted summary:  ginger
+
+
+Review: give squid one star use might thoroughly disappointed quite possibly call crazy 
+Original summary: can for your 
+Predicted summary:  good stuff
+
+
+Review: quality seeds excellent begin germinate hours days ready use never sprouted seeds results good easily recommend sprouter whether human consumption four legged friends 
+Original summary: wheat grass seeds 
+Predicted summary:  great product
+
+
+Review: love stuff great store bought homemade baked goods kicking things professional level works colored dark light frosting also used dusting powdered sugar pretty fine texture 
+Original summary: fun like dust 
+Predicted summary:  perfect
+
+
+Review: bought jumbo greenies black lab loved way expensive regular use notice difference breath primary reason buying 
+Original summary: jumbo greenies good but very expensive 
+Predicted summary:  greenies
+
+
+Review: also bought costco per box included bags oz kids fighting remaining bags good buying due price high price prevent product reaching mass distribution 
+Original summary: very good but too pricey 
+Predicted summary:  good but not the best
+
+
+Review: originally found mints whole foods taste superb get lot money plus comes cute little tin uses dog loves go organic 
+Original summary: wonderful 
+Predicted summary:  my dog loves this
+
+
+Review: regular spam awful almost inedible would give tastes like animal know mean fellow spam turkey spam pretty good great would give worth try 
+Original summary: better than regular 
+Predicted summary:  not bad
+
+
+Review: really need know many cans also whitefish tuna buffet canned cat food thanks 
+Original summary: need to know how many in case 
+Predicted summary:  great product
+
+
+Review: great tasting rich flavor perfect making nice hot cup mocha bought test hershey syrup mocha incredible distinct taste difference noticeable much richer tastes like chocolate less sugary hershey syrup 
+Original summary: great taste 
+Predicted summary:  great flavor
+
+
+Review: number one japan number one great save get shipped automatically every month lugging car 
+Original summary: great tea 
+Predicted summary:  great price
+
+
+Review: bought item read best mayo sold yes even better worlds favorite hellman well review good bit better hellman fact put empty hellman jar said nothing family never knew difference 
+Original summary: blue mayo 
+Predicted summary:  good stuff
+
+
+Review: gum great makes car smell good leave refreshing sweet tart smooth 
+Original summary: love the gum and the price 
+Predicted summary:  gum
+
+
+Review: flavorful smells like heaven great price compared stores arrived fast 
+Original summary: divine 
+Predicted summary:  great product
+
+
+Review: love low calorie organic doctors recommend grams fiber daily smart bran grams per serving fruits veggies set day eat dry vanilla frozen yogurt cinnamon 
+Original summary: yes to smart bran 
+Predicted summary:  love these
+
+
+Review: found spice blend dallas years back tell restaurant using grilled shrimp like cajun spice grilling fish recommend store dry place replace every year least lose flavor 
+Original summary: good stuff 
+Predicted summary:  good stuff
+
+
+Review: plain riceselect couscous delicious easy quick prepare great side item base main course far found bad product riceselect 
+Original summary: yummy 
+Predicted summary:  good
+
+
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
