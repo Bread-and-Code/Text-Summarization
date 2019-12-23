@@ -21,17 +21,19 @@ so lets just build our summarizer on that scaling as a working model and then we
 <li>sum_clean.py X</li>
 <li>append.py X</li>
 <li>display.py X</li>
-<li>vizal_distrb.py</li>
-<li>maxlen.py</li>
-<li>split.py</li>
+<li>vizal_distrb.py X</li>
+<li>maxlen.py X</li>
+<li>split.py X</li> 
 <li>txt_tokenizer.py X</li>
 <li>sum_tokenizer.py X</li>
 <li>DNN_model.py X</li>
-<li>callback.py</li>
-<li>fit.py</li>
-<li>viz_plot.py</li>
-<li>rev_dict.py</li>
-<li>infer_setup.py</li>
-<li>infer_process.py</li>
-<li>int2txt.py</li>
-<li>predictions.py</li>
+<li>callback.py X</li>
+<li>fit.py X</li>
+<li>viz_plot.py X</li>
+<li>rev_dict.py X</li>
+<li>infer_setup.py X</li>
+<li>infer_process.py X</li>
+<li>int2txt.py X</li>
+<li>predictions.py X</li>
+
+Go Check <b>Notebook</b> Folder
