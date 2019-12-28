@@ -35,5 +35,5 @@ so lets just build our summarizer on that scaling as a working model and then we
 <li>infer_process.py X</li>
 <li>int2txt.py X</li>
 <li>predictions.py X</li>
-
+So this phase is done
 Go Check <b>Notebook</b> Folder
